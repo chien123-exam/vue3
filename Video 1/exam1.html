@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Let, var, const</title>
+</head>
+<body>
+    <script>
+        // let name = 'Nguyen Van A'
+        // {
+        //     let name = 'Nguyen Van B'
+        // }
+
+        // console.log(name)
+
+        // const age = 100 
+        // console.log(age)
+
+
+        // function getName() {
+        //     return 'Nguyen Van A'
+        // }
+
+        // console.log(getName())
+
+        // const showMessage = () => {
+        //     return 'Hello word'
+        // }
+
+        // console.log(showMessage())
+
+
+        let students = [
+            {name: 'Nguyen Van A'},
+            {name: 'Nguyen Van B'},
+            {name: 'Nguyen Van C'},
+            {name: 'Nguyen Van D'},
+        ]
+
+        students.forEach((student) => {
+            console.log(student)
+        })
+
+
+        function plusNumber(numberOne, numberTwo) {
+            return numberOne + numberTwo
+        }
+        // console.log(plusNumber(10, 5))
+
+        // class Person {
+        //     name = 'Nguyen Manh Hung'
+
+        //     getName() {
+        //         return this.name
+        //     }
+        // }
+
+        // const personOne = new Person
+        // // console.log(personOne.name)
+        // console.log(personOne.getName())
+
+        class Person {
+            name = ''
+            email = ''
+            age = ''
+
+            constructor(name, email, age) {
+                this.name = name
+                this.email = email
+                this.age = age
+            }
+
+            getName() {
+                return this.name
+            }
+
+            getEmail() {
+                return this.email
+            }
+
+            getAge() {
+                return this.age
+            }
+
+            getInfomation() {
+                return `
+                    <p>Tên bạn là ${this.getName()}</p>
+                    <p>Email của bạn là ${this.getEmail()}</p>
+                    <p>Tuổi của bạn là ${this.getAge()}</p>
+                `
+            }
+        }
+
+        // const personOne = new Person('Nguyen Van A', 'aaa@gmailcom', 25)
+        // document.write(personOne.getInfomation())
+
+        class Student extends Person {
+
+        }
+
+        const studentOne = new Student('Nguyen Van A','aaa@gmail.côm',24)
+        // document.write(studentOne.getName())
+
+        const student = {
+            name: 'Nguyen Van C',
+            getName: function() {
+                return this.name
+            }
+        }
+
+        document.write(student.getName())
+    </script>
+</body>
+</html>

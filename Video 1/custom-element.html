@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Element</title>
+</head>
+<body>
+    <product-list></product-list>
+    <script>
+        class ProductList extends HTMLElement 
+        {
+            products = [
+                {
+                    name: 'iphone 10'
+                },
+
+                {
+                    name: 'iphone 11'
+                },
+
+                {
+                    name: 'iphone 12'
+                }
+            ]
+            
+            connectedCallback() {
+                this.innerHTML = this.renderProduct()
+            }
+
+            renderProduct() {
+                let content = '<h3>Danh sách sản phẩm</h3>'
+                content += '<ul>'
+
+                this.products.forEach(product => {
+                    content += `<li>${product.name}</li>`
+                })
+
+                content += '</ul>'
+
+                return content
+            }
+
+        }
+
+        customElements.define('product-list', ProductList)
+    </script>
+</body>
+</html>

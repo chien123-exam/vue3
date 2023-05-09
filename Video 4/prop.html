@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .active {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div class="container">
+            <h3>Prop</h3>
+            <child-component :page-title="'Suntech'"></child-component>
+        </div>
+    </div>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+        const { createApp, defineProps } = Vue
+
+        const app = createApp({
+           setup() {
+                return {
+
+                }
+            }
+        })
+        app.component('child-component', {
+            setup() {
+                const props = defineProps({
+                    pageTitle: String
+                })
+
+                return {
+                    props
+                }
+            }, 
+            template: `<div>
+                <h3>Children Component</h3>
+                <p>Page Title: {{ pageTitle }}</p>
+            </div>`
+        })
+
+        app.mount('#app')
+    </script>
+</body>
+</html>

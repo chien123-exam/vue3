@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .active {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div class="container">
+            <h3>Computed in Vue3</h3>
+            <button @click="setGender(1)">Male</button>
+            <button @click="setGender(2)">Famale</button>
+            <p>{{ genderLabelComputed }}</p>
+            <p>{{ genderLabel() }}</p>
+            <button @click="changeFullname()">Change Fullname</button>
+            <p>{{ fullname }}</p>
+            <button @click="addComment()">Add comment</button>
+            <ul>
+                <li :key="index" v-for="(comment, index) in comments">
+                    {{comment.content}} | Author name: {{ comment.author_name }}
+                </li>
+            </ul>
+        </div>
+    </div>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+        const { createApp, ref, computed } = Vue
+
+        const app = createApp({
+           setup() {
+                const gender = ref(1)
+
+                const firstName = ref('Mr.')
+                const lastName = ref('Hung')
+
+                const comments = ref ([
+                    {
+                        content: 'Test comment 1',
+                       
+                    }
+                ])
+
+                const addComment = () => {
+                    comments.value.push({
+                        content: 'Chien Chien Chien',
+                        author_id: 2
+                    })
+                }
+                
+                const setGender = (genderValue) => {
+                    gender.value = genderValue
+                }
+
+                const genderLabelComputed = computed(() => {
+                    return gender.value === 1 ? 'Nam' : 'Nữ'
+                })
+
+                const fullname = computed({
+                    get() {
+                        return firstName.value + ' ' + lastName.value;
+                    },
+
+                    set(objectName) {
+                        firstName.value = objectName.firstName
+                        lastName.value = objectName.lastName
+                    }
+                })
+
+                const allComment = computed(() => {
+                    console.log('Allcomment')
+                    let newComments = comments.value.map((item) => {
+                        item.author_name = item.author_id === 1 ? 'Addmin' : 'Member'
+
+                        return item
+                    })
+                    return newComments
+                })
+
+                const changeFullname = () => {
+                    fullname.value = {
+                        firstName: 'Mrs.',
+                        lastName: 'Manh'
+                    }
+                }
+
+                const genderLabel = () => {
+                    return gender.value === 1 ? 'Nam' : 'Nữ'
+                }
+            return {
+                gender,
+                setGender,
+                genderLabel,
+                genderLabelComputed,
+                fullname,
+                changeFullname,
+                comments,
+                addComment,
+                allComment
+            }
+           }
+        })
+
+        app.mount('#app')
+    </script>
+</body>
+</html>

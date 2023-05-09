@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .active {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div class="container">
+            <h3>Component in Vue</h3>
+            <button @click="changeComponent('tab1')" :class="{active: tabNameRef== 'tab1'}">Tab1</button> | 
+            <button @click="changeComponent('tab2')"  :class="{active: tabNameRef== 'tab2'}">Tab2</button>
+            <br>
+
+            <keep-alive>
+                <component :is="tabNameRef"></component>
+            </keep-alive>
+            <!-- <tab1></tab1>
+            <tab2></tab2> -->
+        </div>
+    </div>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+        const { createApp, ref, onActivated, onDeactivated} = Vue
+
+        const app = createApp({
+           setup() {
+                const tabNameRef = ref('tab1')
+
+                const changeComponent = (tabName) => {
+                    tabNameRef.value = tabName
+                }
+            return {
+                tabNameRef,
+                changeComponent
+            }   
+           }
+        })
+        app.component('tab1', {
+            setup() {
+                const comTitle1 = ref('Component Tab 1 ')
+
+                onActivated(() => {
+                    console.log('Component Tab 1 đang được active')
+                })
+
+                onDeactivated(() => {
+                    console.log('Component Tab 1 bị hủy')
+                })
+
+                return {
+                    comTitle1
+                }
+            },
+            template: `<div class="container">
+                        <h3>{{comTitle1}} </h3>
+                </div>`
+        })
+
+        app.component('tab2', {
+            setup() {
+                const comTitle = ref('Component Tab 2 ')
+
+                onActivated(() => {
+                    console.log('Component Tab 2 đang được active')
+                })
+
+                onDeactivated(() => {
+                    console.log('Component Tab 2 bị hủy')
+                })
+
+                return {
+                    comTitle
+                }
+            },
+
+            template:  `<div class="container">
+                        <h3>{{comTitle}} </h3>
+                </div>`
+        })
+        app.mount('#app')
+    </script>
+</body>
+</html>

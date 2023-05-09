@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .active {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div class="container">
+            <h3>{{ pageTitle }}</h3>
+            <a href="#" @click="changeTab('tab1')"
+             :class="{
+                active: tabName== 'tab1',
+                invalid: invalid
+            }">Tab 1</a> | 
+            <a :class="listClass" href="#" @click="changeTab('tab2')" :class="{active: tabName== 'tab2'}">Tab 2</a>
+            <div class="content-tab-1" v-if="tabName == 'tab1'">Content Tab 1</div>
+            <div class="content-tab-2" v-if="tabName == 'tab2'">Content Tab 2</div>
+            <br>
+            <p :style="{color: tabName== 'tab1' ? 'green' : 'blue' }">Nguyen Tien Chien</p>
+        </div>
+    </div>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+        const { createApp } = Vue
+
+        const app = createApp({
+           data() {
+            return {
+                pageTitle: 'Hello',
+                tabName: 'tab1',
+                invalid: true,
+                listClass: ['test-class-1', 'test-class-2'],
+            }
+           },
+
+           methods: {
+            changeTab(tabName) {
+                this.tabName = tabName
+            }
+           },
+        })
+
+        app.mount('#app')
+    </script>
+</body>
+</html>

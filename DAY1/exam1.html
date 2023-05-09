@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get stated Vue</title>
+    <style>
+        #red {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div class="container">
+            <p>{{message}}</p>
+            <p>{{email}}</p>
+            <p>{{product || json}}</p>
+
+            <p v-html="content" v-show="isShowContent"></p>
+
+            <ul>
+                <li :key="index" v-for="(products,index) in product">{{ products.name }}</li>
+            </ul>
+
+            <div :id="id" :number="number">Học lập trình tại SUNTECH</div>
+            <h4 class="suntech" :class="className" :title="'Học lập trình web'">Vue3 JS</h4>
+            <h3 :class="{'active-test': activeTest}">Define class in Vue</h3>
+            <h2 :style="styleAAA">Binding Style</h2>
+        </div>
+    </div>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+        const { createApp } = Vue 
+
+        //Create Instance
+
+        const app = createApp({
+            data() {
+                return {
+                    
+                    id: 'red',
+                    message: 'Hello Vue!',
+                    email: 'example@gmai.com',
+                    product: [
+                        {id: 1, name: 'Iphone 14'},
+                        {id: 2, name: 'Iphone 15'},
+                        {id: 3, name: 'Iphone 16'},
+                        {id: 4, name: 'Iphone 17'},
+                    ],
+                    content: '<font color="red">SUNTECH.EDU</font>',
+                    isShowContent: true,
+                    number: 100,
+                    className: ['test1 demo1 suntech1 suntech-edu'],
+                    activeTest: false,
+                    styleAAA: {
+                        color: 'red',
+                        border: '1px solid red',
+                        background: 'orange',
+                    }
+                }
+            }
+        })
+        app.mount('#app')
+    </script>
+</body>
+</html>

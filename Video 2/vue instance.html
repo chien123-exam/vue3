@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue instance</title>
+</head>
+<body>
+    <div id="app">
+        <div class="container">
+            <input v-bind="attributes" />
+            <a :href="getLabelLink()">{{ getLabelLink() }}</a>
+            <h3> {{ name }}</h3>
+            <h4> {{ pageTitle }}</h4>
+            <!-- <div> {{ student }}</div> -->
+            <div>
+                <ul>{{ student || json }}</ul>
+            </div>
+
+            <div v-if="isShowName">Get From functinon {{ getName() }}</div>
+            <div :number="id">Get From functinon {{ getEmail() }}</div>
+            <p v-html="message"></p>
+            <button :disabled="false" @click="showMessage()">Button</button>
+        </div>
+    </div>
+
+    <!-- <div id="app2">
+        <div class="container">
+            <h3> {{ name }}</h3>
+        </div>
+    </div> -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+        const { createApp } = Vue 
+
+        const app = createApp({
+            data() {
+                return {
+                    attributes: {
+                        class: 'test-attribute',
+                        name: 'fullname',
+                        id: 'fullname',
+                    },
+                    id: 'your-name',
+                    message: '<strong>Suntech academy</strong><font color="red">Học vue js</font>',
+                    isShowName: true,
+                    name: 'Nguyen Van A',
+                    pageTitle: 'Học VueJS',
+                    email: 'email@gmail.com',
+                    student: [
+                        {
+                            id: 1,
+                            name: 'Nguyen Van A'
+                        },
+
+                        {
+                            id: 2,
+                            name: 'Nguyen Van B'
+                        },
+
+                        {
+                            id: 3,
+                            name: 'Nguyen Van C'
+                        }
+                    ]
+                }
+            },
+
+            methods: {
+                getName() {
+                    return this.name
+                },
+                
+                getEmail() {
+                    return this.email 
+                },
+
+                getLabelLink() {
+                    return 'Google'
+                },
+
+                showMessage() {
+                    alert ('Test')
+                }
+            }
+        })
+
+        // const app2 = createApp({
+        //     data() {
+        //         return {
+        //             name: 'Nguyen Van B',
+        //         }
+        //     }
+        // })
+
+        // app2.mount('#app2')
+
+        app.mount('#app') //Mount instance app to div#app
+    </script>
+</body>
+</html>
